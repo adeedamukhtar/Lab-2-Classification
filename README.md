@@ -1,95 +1,70 @@
-# Dry Bean Classification using Machine Learning
+# Dry Bean Classification Project
 
-##  Project Overview
+## Project Overview
+This project aims to classify different varieties of dry beans based on their physical characteristics. The dataset contains 13,611 records with 16 numeric shape features extracted from bean images and a target label indicating the bean variety (7 classes).
 
-This project focuses on the classification of **Dry Bean types** using supervised machine learning algorithms. The dataset contains **17 numerical features** extracted from bean images and is used to train and evaluate classification models like **Logistic Regression**, **k-Nearest Neighbors (k-NN)**, and **Decision Trees**.
+The following models were implemented and evaluated for this classification task:
 
----
+- Logistic Regression  
+- k-Nearest Neighbors (k-NN)  
+- Decision Tree Classifier  
 
-##  Key Features
-
-- Multiclass classification with 7 dry bean types
-- Comprehensive data preprocessing
-- Model performance comparison using multiple metrics
-- Scikit-learn pipelines for clean, reusable ML workflows
+Each model was trained using robust preprocessing pipelines and evaluated using comprehensive classification metrics.
 
 ---
 
-## Dataset Information
-
-- Source: UCI Machine Learning Repository  
-- Samples: `13,611` dry bean samples  
-- Features: `16` numerical attributes related to shape, geometry, and texture  
-- Target: `Class` — one of the following:
-  - **SEKER**
-  - **BARBUNYA**
-  - **BOMBAY**
-  - **CALI**
-  - **DERMASON**
-  - **HOROZ**
-  - **SIRA**
-
-### Sample Features:
-- `Area`, `Perimeter`, `MajorAxisLength`, `MinorAxisLength`
-- `Eccentricity`, `Solidity`, `Extent`, `Compactness`
-- Shape Factors (`ShapeFactor1` to `ShapeFactor4`)
+## Key Features
+- Implemented in Python using scikit-learn  
+- Standardized preprocessing with `ColumnTransformer` and `StandardScaler`  
+- Target variable encoded with `LabelEncoder` for multiclass classification  
+- Performance evaluation with `classification_report` (Accuracy, Precision, Recall, F1-score)  
 
 ---
 
-##  Methodology Highlights
-
-###  Data Loading & Cleaning
-- Loaded dataset from `Dry_Bean_Dataset.xlsx`
-- Verified class distribution
-- Ensured data integrity and correct data types
-
-###  Exploratory Data Analysis
-- Visualized class distribution and feature relationships
-- Identified potential feature importance and separability
-
-### Feature & Target Preparation
-- Input features `X`: All 16 numerical columns
-- Target variable `y`: Bean `Class` (converted to categorical labels)
-
-### Data Splitting
-- Split into **80% training** and **20% testing** sets using `train_test_split` with `stratify=y` to preserve class balance
+## Dataset Summary
+- **Total Records:** 13,611  
+- **Features:** 16 numeric shape descriptors (Area, Perimeter, Eccentricity, etc.)  
+- **Target Classes:** 7 bean varieties (e.g., SEKER, BARBUNYA, BOMBAY, etc.)  
 
 ---
 
-## Model Building & Evaluation
-
-Three classification models were evaluated:
-
-### 1️  Logistic Regression
-- Linear classifier with regularization
-- Good baseline with solid performance
-
-### 2️  k-Nearest Neighbors (k-NN)
-- Distance-based algorithm
-- Performed well but slower for large datasets
-
-### 3️  Decision Tree Classifier
-- Tree-based model that handles non-linear boundaries
-- Tended to overfit slightly without pruning
+## Data Preprocessing
+- Data loading performed using `pandas.read_excel()`  
+- Target labels transformed from strings to integers via `LabelEncoder`  
+- Features standardized using `StandardScaler` for improved model training  
+- Dataset split into 80% training and 20% testing sets with stratification to maintain class distribution  
 
 ---
 
-## Performance Evaluation
+## Models and Evaluation
+Each classification model was wrapped in a scikit-learn Pipeline that combined preprocessing and the classifier itself. The models were evaluated on the test set with the following metrics:
 
-Evaluated using Accuracy, Precision, Recall, and F1 Score:
-
-| Model               | Accuracy | Precision | Recall | F1 Score |
-|---------------------|----------|-----------|--------|----------|
-| Logistic Regression | 0.9266   | 0.9393    | 0.9369 | 0.9379   |
-| k-NN                | 0.9232   | 0.9395    | 0.9344 | 0.9367   |
-| Decision Tree       | 0.8928   | 0.9069    | 0.9072 | 0.9070   |
+| Model               | Accuracy | Precision (Macro) | Recall (Macro) | F1 Score (Macro) |
+|---------------------|----------|-------------------|----------------|------------------|
+| Logistic Regression  | 0.9265   | 0.9393            | 0.9369         | 0.9379           |
+| k-Nearest Neighbors  | 0.9232   | 0.9395            | 0.9344         | 0.9367           |
+| Decision Tree       | 0.8928   | 0.9069            | 0.9072         | 0.9070           |
 
 ---
 
-##  Key Takeaways
+## Insights
+- Logistic Regression and k-NN showed the best overall performance, achieving over 92% accuracy and strong macro-averaged F1 scores.  
+- Decision Tree achieved slightly lower accuracy, possibly due to overfitting in certain classes.  
+- Feature standardization was critical in improving model convergence and accuracy.  
+- Macro-averaged metrics effectively accounted for class imbalance, providing a balanced evaluation across all classes.  
 
-- **Logistic Regression** and **k-NN** performed best with accuracy above 92%
-- **Decision Tree** showed decent performance but was slightly less reliable due to possible overfitting
-- Proper scaling (e.g., StandardScaler) improved model performance, especially for distance-based methods like k-NN
+---
 
+## Methodology Summary
+- **Preprocessing Pipeline:** StandardScaler applied to all features  
+- **Model Integration:** Each classifier integrated into a pipeline for seamless preprocessing and prediction  
+- **Evaluation:** Utilized `classification_report()` for detailed metrics and model comparison  
+- **Reproducibility:** Random state fixed during train-test split and model training to ensure consistent results  
+
+---
+
+## Citation
+Özguven, M. M., & Ege University, Department of Computer Engineering. (2015). *Dry Bean Dataset*. UCI Machine Learning Repository. https://archive.ics.uci.edu/ml/datasets/Dry+Bean+Dataset
+
+---
 
